@@ -24,7 +24,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="lazy-import" href="my-view1.html">
 <link rel="lazy-import" href="my-view2.html">
-<link rel="lazy-import" href="my-view3.html">
 <link rel="lazy-import" href="my-view404.html">
 
 <dom-module id="my-app">
@@ -80,9 +79,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="[[rootPath]]view1">View One</a>
-          <a name="view2" href="[[rootPath]]view2">View Two</a>
-          <a name="view3" href="[[rootPath]]view3">View Three</a>
+          <a name="view1" href="[[rootPath]]view1">Your Calm Time</a>
+          <a name="view2" href="[[rootPath]]view2">About Time</a>
         </iron-selector>
       </app-drawer>
 
@@ -92,7 +90,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>My App</div>
+            <div main-title>My Calm App</div>
           </app-toolbar>
         </app-header>
 
@@ -103,7 +101,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             role="main">
           <my-view1 name="view1"></my-view1>
           <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
       </app-header-layout>

@@ -1,7 +1,7 @@
 {
-  "name": "My App",
-  "short_name": "My App",
-  "description": "My App description",
+  "name": "My Calm App",
+  "short_name": "My Calm App",
+  "description": "A app to control your time meditation",
   "start_url": "./?homescreen=1",
   "display": "standalone",
   "theme_color": "#3f51b5",
