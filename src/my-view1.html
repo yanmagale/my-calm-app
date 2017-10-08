@@ -4,7 +4,7 @@
 <dom-module id="my-view1">
   <template>
     <style include="shared-styles">
-      :host {
+       :host {
         display: block;
         padding: 5px;
         background-image: url(http://127.0.0.1:8000/images/raining.jpg);
@@ -15,21 +15,24 @@
         background-size: cover;
       }
 
-      .card {
+      .content{
+        color: #fff;
+        font-size: 18px;
+        display: flex;
+      }
+
+      #start-timer{
+        font-weight: bold;
+        font-size: 15px;
         color: #ffffff;
       }
     </style>
 
-    <div class="card">
+    <div class="content">
       <h1>Your Calm Time</h1>
-      
-      <p>Roadmap</p>
-      <ol>
-        <li>Call event to dispatch timer</li>
-        <li>Call event to stop and action to clear time</li>
-        <li>Set background to calm image</li>
-        <li>Play firing/raining music</li>
-      </ol>
+
+      <div>{{timer}}</div>
+      <button on-click="start" id="start-timer">Start Session Meditate</button>
 
     </div>
   </template>
@@ -37,6 +40,25 @@
   <script>
     class MyView1 extends Polymer.Element {
       static get is() { return 'my-view1'; }
+      static get properties() {
+        return {
+          timer: {
+            type: Number,
+            value: 1000
+          }
+        }
+      }
+
+      start(){
+        this.timer = setInterval(()=> {
+          if(this.timer === 0 ) {
+            console.log("STOP TIMMER")
+          } else {
+            this.timer--
+          }
+        }, 1000);
+      }
+
     }
 
     window.customElements.define(MyView1.is, MyView1);
