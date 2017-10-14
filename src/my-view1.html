@@ -7,7 +7,7 @@
        :host {
         display: block;
         padding: 5px;
-        background-image: url(http://127.0.0.1:8000/images/raining.jpg);
+        background-image: url("[[rootPath]]assets/raining.jpg");
         background-repeat: no-repeat;
         position: absolute;
         width: 100%;
@@ -15,23 +15,30 @@
         background-size: cover;
       }
 
-      .content{
+      .content {
         color: #fff;
         font-size: 18px;
-        display: flex;
       }
 
-      #start-timer{
+      #start-timer {
         font-weight: bold;
         font-size: 15px;
         color: #ffffff;
+      }
+
+      #timer-element{
+        width: 200px;
+        height: 100px;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
       }
     </style>
 
     <div class="content">
       <h1>Your Calm Time</h1>
 
-      <div>{{timer}}</div>
+      <div id="timer-element">{{timer}}</div>
       <button on-click="start" id="start-timer">Start Session Meditate</button>
 
     </div>
@@ -44,19 +51,32 @@
         return {
           timer: {
             type: String,
-            value: 6000,
+            value: "01:00",
             notify: true
           }
         }
       }
 
-      start(){
-        this.timer = setInterval(()=> {
-          if(this.timer === 0 ) {
-            console.log("STOP TIMMER")
-          } else {
-            console.log("VALUE TIMER", this.timer)
-            this.timer = this.timer - 1
+      start() {
+        const durationSession = 60 * 1
+        const display = document.querySelector('#timer-element');
+        this._start(durationSession, display);
+      }
+
+      _start(duration, display) {
+        var timerControl = duration, minutes, seconds;
+
+        const flowTimmer = setInterval(() => {
+          minutes = parseInt(timerControl / 60, 10)
+          seconds = parseInt(timerControl % 60, 10)
+
+          minutes = minutes < 10 ? "0" + minutes : minutes
+          seconds = seconds < 10 ? "0" + seconds : seconds
+
+          this.timer = minutes + ":" + seconds
+
+          if (--timerControl < 0) {
+            clearInterval(flowTimmer)
           }
         }, 1000);
       }
@@ -67,6 +87,6 @@
   </script>
 
   <script>
-    addEventListener('timer-changed', function() {console.log('timer changed')});
+    addEventListener('timer-changed', function () { console.log('timer changed') });
   </script>
 </dom-module>
