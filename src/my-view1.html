@@ -20,32 +20,102 @@
         font-size: 18px;
       }
 
-      #start-timer {
-        font-weight: bold;
-        font-size: 15px;
-        color: #ffffff;
+      #title {
+        width: 100%;
+        position: relative;
+        height: 50px;
       }
 
-      #timer-element{
-        width: 200px;
-        height: 100px;
-        font-size: 20px;
+      #title h2 {
+        padding: 10px;
+        margin-left: 20%;
+      }
+
+      #sentence {
+        width: 100%;
+        position: relative;
+        height: 50px;
+      }
+
+      #sentence p {
+        font-size: 22px;
+        margin-left: 10px;
+        margin-top: 10%;
+        text-decoration: underline;
+        font-style: italic;
+      }
+
+      .start-timer {
         font-weight: bold;
-        text-align: center;
+        font-size: 20px;
+        color: green;
+      }
+
+      #box-timer-element {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        margin-top: 20%;
+      }
+
+      #timer-element {
+        width: 100%;
+        height: 100%;
+        font-size: 50px;
+        font-weight: bold;
+        padding: 10px;
+        margin-left: 30%;
+      }
+
+      #session-actions {
+        position: relative;
+        width: 100%;
+        margin-top: 30%;
+      }
+
+      .circle-action {
+        width: 7%;
+        height: 20%;
+        border: 1px solid;
+        border-radius: 50%;
+        background-color: ghostwhite;
+        padding: 10px;
+        position: relative;
+        left: 20%;
       }
     </style>
 
     <div class="content">
-      <h1>Your Calm Time</h1>
+      <div id="title">
+        <h2>Your Calm Time</h2>
+      </div>
 
-      <div id="timer-element">{{timer}}</div>
-      <button on-click="start" id="start-timer">Start Session Meditate</button>
+      <div id="sentence">
+        <p>This is your moment. Relax and thing at things that you can i do today.</p>
+      </div>
+
+      <div id="box-timer-element">
+        <div id="timer-element">{{timer}}</div>
+      </div>
+
+      <div id="session-actions">
+        <div class="circle-action">
+          <button on-click="start" class="start-timer" title="Start Session">+</button>
+        </div>
+      </div>
 
     </div>
   </template>
 
   <script>
     class MyView1 extends Polymer.Element {
+
+      constructor() {
+        super()
+        this.isStopped = false
+        this.isPlaying = false
+      }
+
       static get is() { return 'my-view1'; }
       static get properties() {
         return {
@@ -57,6 +127,11 @@
         }
       }
 
+      stop() {
+        this.isStopped = true
+      }
+
+
       start() {
         const durationSession = 60 * 1
         const display = document.querySelector('#timer-element');
@@ -64,7 +139,7 @@
       }
 
       _start(duration, display) {
-        var timerControl = duration, minutes, seconds;
+        let timerControl = duration, minutes, seconds;
 
         const flowTimmer = setInterval(() => {
           minutes = parseInt(timerControl / 60, 10)
@@ -75,7 +150,7 @@
 
           this.timer = minutes + ":" + seconds
 
-          if (--timerControl < 0) {
+          if (--timerControl < 0 || this.isStopped) {
             clearInterval(flowTimmer)
           }
         }, 1000);
