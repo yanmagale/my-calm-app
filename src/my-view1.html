@@ -1,5 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<!--<link rel="import" href="shared-styles.html">-->
+<link rel="import" href="shared-styles.html">
 
 <dom-module id="my-view1">
   <template>
@@ -97,7 +97,7 @@
       <div id="box-timer-element">
         <div id="timer-element">{{timer}}</div>
       </div>
-      
+
       <template is="dom-if" if="{{isPlaing}}">
         <div id="session-actions">
           <div class="circle-action">
@@ -124,7 +124,7 @@
             type: String,
             value: "01:00",
             notify: true
-          }, 
+          },
           isPlaing: {
             type: Boolean,
             notify: true,
@@ -133,24 +133,24 @@
         }
       }
 
-      
+
       start() {
         const durationSession = 60 * 1
         this.isPlaing = false
         this._start(durationSession)
-        
+
       }
 
       _start(duration) {
         const music = new Audio('src/assets/raining.mp3')
-        
-        music.addEventListener('ended', function() {
-            this.currentTime = 0;
-            this.play();
+
+        music.addEventListener('ended', function () {
+          this.currentTime = 0;
+          this.play();
         }, false)
 
         music.play()
-        
+
         let timerControl = duration, minutes, seconds;
         const flowTimmer = setInterval(() => {
           minutes = parseInt(timerControl / 60, 10)
@@ -166,7 +166,7 @@
             clearInterval(flowTimmer)
             this.isPlaing = true
             this.timer = "01:00"
-      
+
           }
         }, 1000);
       }
