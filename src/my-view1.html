@@ -133,13 +133,16 @@
         }
       }
 
+      
       start() {
         const durationSession = 60 * 1
         this.isPlaing = false
-        this._start(durationSession);        
+        this._start(durationSession)
       }
 
       _start(duration) {
+        const music = new Audio('src/assets/raining.mp3');
+        music.play();
         let timerControl = duration, minutes, seconds;
         const flowTimmer = setInterval(() => {
           minutes = parseInt(timerControl / 60, 10)
@@ -151,6 +154,7 @@
           this.timer = minutes + ":" + seconds
 
           if (--timerControl < 0 || this.isStopped) {
+            music.pause();
             clearInterval(flowTimmer)
             this.isPlaing = true
             this.timer = "01:00"
