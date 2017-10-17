@@ -138,11 +138,19 @@
         const durationSession = 60 * 1
         this.isPlaing = false
         this._start(durationSession)
+        
       }
 
       _start(duration) {
-        const music = new Audio('src/assets/raining.mp3');
-        music.play();
+        const music = new Audio('src/assets/raining.mp3')
+        
+        music.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        }, false)
+
+        music.play()
+        
         let timerControl = duration, minutes, seconds;
         const flowTimmer = setInterval(() => {
           minutes = parseInt(timerControl / 60, 10)
