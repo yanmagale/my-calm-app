@@ -97,12 +97,14 @@
       <div id="box-timer-element">
         <div id="timer-element">{{timer}}</div>
       </div>
-
-      <div id="session-actions">
-        <div class="circle-action">
-          <button on-click="start" class="start-timer" title="Start Session">+</button>
+      
+      <template is="dom-if" if="{{isPlaing}}">
+        <div id="session-actions">
+          <div class="circle-action">
+            <button on-click="start" class="start-timer" title="Start Session">+</button>
+          </div>
         </div>
-      </div>
+      </template>
 
     </div>
   </template>
@@ -113,7 +115,6 @@
       constructor() {
         super()
         this.isStopped = false
-        this.isPlaying = false
       }
 
       static get is() { return 'my-view1'; }
@@ -123,24 +124,23 @@
             type: String,
             value: "01:00",
             notify: true
+          }, 
+          isPlaing: {
+            type: Boolean,
+            notify: true,
+            value: true
           }
         }
       }
 
-      stop() {
-        this.isStopped = true
-      }
-
-
       start() {
         const durationSession = 60 * 1
-        const display = document.querySelector('#timer-element');
-        this._start(durationSession, display);
+        this.isPlaing = false
+        this._start(durationSession);        
       }
 
-      _start(duration, display) {
+      _start(duration) {
         let timerControl = duration, minutes, seconds;
-
         const flowTimmer = setInterval(() => {
           minutes = parseInt(timerControl / 60, 10)
           seconds = parseInt(timerControl % 60, 10)
@@ -152,6 +152,9 @@
 
           if (--timerControl < 0 || this.isStopped) {
             clearInterval(flowTimmer)
+            this.isPlaing = true
+            this.timer = "01:00"
+      
           }
         }, 1000);
       }
@@ -159,9 +162,5 @@
     }
 
     window.customElements.define(MyView1.is, MyView1);
-  </script>
-
-  <script>
-    addEventListener('timer-changed', function () { console.log('timer changed') });
   </script>
 </dom-module>
