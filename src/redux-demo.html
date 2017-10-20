@@ -1,0 +1,46 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+
+<link rel="import" href="redux-mixin.html">
+<dom-module id="redux-demo">
+  <template>
+    <style>
+      p {
+        font-size: 22px;
+        margin-left: 10px;
+        margin-top: 10%;
+        text-decoration: underline;
+        font-style: italic;
+      }
+    </style>
+    <p>
+      <i>[[message]]</i>
+    </p>
+  </template>
+  <script>
+    class ReduxDemo extends ReduxMixin(Polymer.GestureEventListeners(Polymer.Element)) {
+      static get is() { return 'redux-demo'; }
+      static get properties() {
+        return {
+          message: {
+            type: String,
+            statePath: 'message'
+          }
+        };
+      }
+
+      constructor() {
+        super();
+        this.dispatchDefault();
+      }
+
+      dispatchDefault() {
+        this.dispatch({
+          type: 'UPDATE_MESSAGE',
+          message: 'This is your moment. Relax and thing at things that you can i do today.',
+        });
+      }
+    }
+    customElements.define(ReduxDemo.is, ReduxDemo);
+  </script>
+</dom-module>

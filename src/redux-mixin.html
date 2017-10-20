@@ -1,0 +1,21 @@
+<link rel="import" href="../bower_components/polymer-redux/polymer-redux.html">
+
+
+<script>
+  const initial = {message: 'Redux Works Beautiful'};
+  const reducer = function (state, action) {
+    switch (action.type) {
+      case 'UPDATE_MESSAGE': return {message: action.message};
+      default: return state;
+    }
+  };
+  const store = Redux.createStore(
+    reducer,
+    initial,
+    
+    Redux.compose(window.devToolsExtension ? window.devToolsExtension() : v => v
+    )
+  );
+
+  ReduxMixin = PolymerRedux(store);
+</script>
