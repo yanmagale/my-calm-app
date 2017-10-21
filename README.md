@@ -3,10 +3,12 @@
 A app to control your time meditation
 
 
-
 # Setup
 - Clone this repository
 - Run `npm i`
+
+You wil see a image like this
+![Image of Main Screen App](calm.png)
 
 
 # Roadmap for 1.0
