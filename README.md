@@ -6,6 +6,7 @@ A app to control your time meditation
 # Setup
 - Clone this repository
 - Run `npm i`
+- Run `polymer serve --open`
 
 You wil see a image like this
 ![Image of Main Screen App](calm.png)
