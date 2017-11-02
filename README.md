@@ -4,6 +4,7 @@ A app to control your time meditation
 
 
 # Setup
+> You need that Polymer CLI has installed globally
 - Clone this repository
 - Run `npm i`
 - Run `polymer serve --open`
