@@ -88,7 +88,7 @@
       </div>
 
       <div id="sentence">
-        <redux-demo></redux-demo>
+        <redux-demo change="{{isDispatchSentence}}"></redux-demo>
       </div>
 
       <div id="box-timer-element">
@@ -126,6 +126,11 @@
             type: Boolean,
             notify: true,
             value: true
+          },
+          isDispatchSentence: {
+            type: Boolean,
+            notify: true,
+            value: false
           }
         }
       }
@@ -163,7 +168,7 @@
             clearInterval(flowTimmer)
             this.isPlaing = true
             this.timer = "01:00"
-
+            this.isDispatchSentence = true
           }
         }, 1000);
       }

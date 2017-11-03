@@ -25,8 +25,20 @@
           message: {
             type: String,
             statePath: 'message'
+          },
+          change: {
+            type: String,
+            notify: true,
+            reflectToAttribute: true,
+            observer: '_activeChanged'
           }
         };
+      }
+
+      static get observers() {
+        return [
+            '_activeChanged()'
+        ]
       }
 
       constructor() {
@@ -34,10 +46,23 @@
         this.dispatchDefault();
       }
 
+      _activeChanged() {
+        if(this.change){
+          this.dispatchFinish();
+        }
+      }
+
       dispatchDefault() {
         this.dispatch({
           type: 'UPDATE_MESSAGE',
           message: 'This is your moment. Relax and thing at things that you can i do today.',
+        });
+      }
+
+      dispatchFinish() {
+        this.dispatch({
+          type: 'UPDATE_MESSAGE',
+          message: 'End Session. Its time to achieve your goals.',
         });
       }
     }
